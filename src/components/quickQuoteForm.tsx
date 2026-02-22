@@ -25,7 +25,7 @@ export const QuickQuoteForm = () => {
   const steps = ["Origin", "Destination", "Weight"];
 
   const { control, handleSubmit, trigger } = useForm<FormValues>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(schema) as any,
     mode: "onChange",
     defaultValues: {
       originCountry: "",
@@ -47,7 +47,7 @@ export const QuickQuoteForm = () => {
 
   const handleBack = () => setActiveStep((prev) => prev - 1);
 
-  const fetchQuotes = async (data: FormValues) => {
+  const fetchQuotes = async () => {
     setLoading(true);
     setQuotes([]);
     await new Promise((r) => setTimeout(r, 1000));
@@ -65,7 +65,7 @@ export const QuickQuoteForm = () => {
       country: data.destinationCountry,
       city: data.destinationCity,
     });
-    fetchQuotes(data);
+    fetchQuotes();
     setActiveStep(3);
   };
 
@@ -200,7 +200,6 @@ export const QuickQuoteForm = () => {
                       type="number"
                       placeholder="Weight (kg)"
                       className="w-full p-4 border rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none bg-white shadow-sm transition transform hover:scale-[1.02]"
-                      {...{ valueAsNumber: true }}
                     />
                     {fieldState.error && (
                       <p className="text-red-500 text-sm mt-1">
