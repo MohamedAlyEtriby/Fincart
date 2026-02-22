@@ -1,4 +1,4 @@
-import { QuickQuoteForm } from "./components/QuickQuoteForm";
+import { QuickQuoteForm } from "./components/quickQuoteForm";
 
 export const App = () => {
   return <QuickQuoteForm />;
